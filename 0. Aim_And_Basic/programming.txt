@@ -1,0 +1,24 @@
+The battery of an electronic device or the small (3V) motor used in an electronic device 
+are the mechanism or spare part of it. Mechanism can be used independent of device. 
+Use the same mechanism(spare part) in any different device and the purpose remains the same. 
+
+The mechanisms of a lego art are lego pieces. The end user is given all the mechanisms and 
+he produces the final lego art. He is bringing together all the mechanisms(lego pieces) in any order he wants. 
+
+When mechanisms of a device are brought together in any order. This is called policy making(programming). 
+And the user is called policy maker (programmer). Such devices are programmable devices. 
+
+(Although devices are sold whose mechanisms are not brought together by the end user)
+(Such devices are non programmable devices: analog wrist watch).  
+
+--------------------------------------------------------------------------------------------------------------
+
+Mechanism of computer: Hardware level implementation of all fundamental arithmetic, logical, trignometrical, 
+inverse trignometrical, exponential, logarithmic, hyperbolic, inverse hyperbolic, data movement and control 
+flow management and functions. 
+(Hardware level of arithmetic and logical operations). 
+Mechanisms are implemented in the CPU. 
+Main Memory: Interface provided to combine the mechanisms.
+
+We can bring together mechanism of computer in any order we please, hence we are programmers (policy makers). 
+And this activity is programming.

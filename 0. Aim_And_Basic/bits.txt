@@ -1,0 +1,20 @@
+QUESTION:
+	How many bits are needed to represent an integer N in the binary format?
+ANSWER: 
+	floor(ln N) + 1 
+		where ln is log to the base 2 
+------------------------------------
+
+BIT is the most fundamental unit in computing world. 
+
+1 nibble = 4 bits 
+1 byte = 8 bits 
+1 word = 16 bits 
+1 double word = 32 bits 
+
+1 quad word = 64 bits 
+2 quad word = 128 bits (PARAGRAPH)
+PARAGRAPH = 2 QUAD WORD  
+---------------------------------------
+BIT is the smallest memory unit but 
+BYTE is smallest "addressable" unit
