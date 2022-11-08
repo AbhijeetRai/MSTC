@@ -1,0 +1,75 @@
+SESSION 20: (Refer session 20 notes of diagrams)
+
+Programmer's view of RAM: 
+RAM is collection of bytes, 
+where each bytes has been assigned a number called byte address. 
+Byte address helps to identify each byte on the RAM. 
+RAM is not collection of bits because bits are not addressable. 
+Smallest addressable unit of memory is byte.
+
+
+
+Programmer's view of Harddisk:
+A RAM is collection/group of (individual) bytes. 
+Similarly, the harddisk is group of 512 bytes. 
+Such group of 512 bytes is called a sector. 
+The hard disk is group of sectors. 
+
+Modern day files have grown in size (usually in large number of mbs or few gbs). 
+Read write operation of say 1 GB (2 raise to 30 bytes) file
+into 512 bytes long (actually short hehe) sectors would become tedious. 
+
+Let's assume we have a big ice tray containing 8 ice blocks. 
+Now if we were to move it to smaller ice trays, which hold 2 ice blocks. 
+We need to do it 8/2 = 4 (times). 
+
+Similary if I were to move 1 GB (2^30 bytes) into sectors of 512 bytes. 
+(HYPOTHETICALLY, BY IGNORNING INNER WORKING OF THE COMPUTER SCIENCE)
+We need to do it 2^30/512 times.2^30/2^9 = 2^21 times. 
+While performing read/write at sector level might save some memory. 
+But it turns out to be tedious for the modern times. 
+
+This is not 1960s anymore, 
+files are much much larger and memory is realtively cheaply available. 
+IBM introduced the first magnetic disk, the RAMAC, in 1955; 
+it held 5 megabytes and rented for \$3,200 per month 
+
+A modern day user would gladly "TRADE OFF" smaller chunks of memory 
+for the sake of performance optimization. 
+
+Hence logical block is created by grouping 4 sectors. 
+(Logical blocks can vary in size, will speak about it later) 
+If 4 sectors (can also be referred as physical blocks) form a logical block. 
+then the size of logical block is 512 bytes x 4 = 2048 bytes. 
+
+Now if we were to move the same 1 GB (2^30 bytes) file into 2048 bytes "LONG"
+logical blocks. (AGAIN HYPOTHETICALLY, BECAUSE I HAVE NO CLUE HOW READ WRITE HAPPENS INTERNALLY xd)
+We need to do it 2^30/2048 = 2^30/2^11 = 2^19 times only. 
+
+HENCE, the read /write takes places at logic block level but not at sector level.
+
+As we go on increasing sector size, read / write keeps getting efficinet but will lead to memory 
+wastage if file sizes are much smaller. 
+Hence finding ideal logical block size is important (with respect to file size).
+
+Logical block size remains same on the same partition of the harddisk. 
+Logical block size can vary across partitions of the same disk. 
+
+In windows operating system, a logical block is 4 KB (8 Sectors) long by default. 
+(Hit the shown command on powershell to get block size)
+
+Get-CimInstance -ClassName Win32_Volume | Select-Object Label, BlockSize | Format-Table -AutoSize
+
+Label       BlockSize
+-----       ---------
+Windows-SSD      4096
+WinRE_DRV        4096
+SYSTEM           4096
+
+
+The block size cannot be changed dynamically unless the partition is formatted. 
+-------------------------------------------------------------------------------------------------------------------------------
+
+SESSION 21: (Refer session 21 notes for diagrams)
+
+

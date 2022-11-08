@@ -1,0 +1,23 @@
+Let's say we want to store 75 on harddisk. 
+
+	We could store binary of 75 into harddisk. That is store 01001011 in a file of size 1 byte and store on harddisk. 
+	This is called binary encoding and such files are called binary files. Binary encoding is memory efficient
+	(executable, jpeg, png and mp3 are also binary files). 
+	We can do binary encoding only for numbers. 
+
+	To store 75, we could also split as, 7 and 5. 
+	Then convert to ascii of 7 and 5 as, 55 & 53. 
+	Then store binary of ascii on disk: 55 (00110111) and 53 (00110101)
+	This is ascii encoding and files saving ascii encoding are text files. These are not as memory efficient 
+	Text encoding is applicable on characters, numbers and alphanumeric values. 
+	
+	Any program written in any language other than machine language is saved in text encoding/file. (For assembly extension is .asm or .s)
+	The job of assembler (software) is to take the text file, encode it in binary and save the binary file on disk (.obj or .o)
+
+	Once binary file is saved on disk, it is loaded into main memory for execution by program loader. 
+	This task is program loading.
+
+
+Assembler takes "SOURCE CODE" and converts it into program/code (BINARY FILE) 
+A programmer develops source code which is converted into program / code by the assembler into 0 and 1. 
+(Said by Bjarne Starstroup)
