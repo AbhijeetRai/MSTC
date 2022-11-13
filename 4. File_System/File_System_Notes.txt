@@ -7,8 +7,6 @@ Byte address helps to identify each byte on the RAM.
 RAM is not collection of bits because bits are not addressable. 
 Smallest addressable unit of memory is byte.
 
-
-
 Programmer's view of Harddisk:
 A RAM is collection/group of (individual) bytes. 
 Similarly, the harddisk is group of 512 bytes. 
@@ -66,10 +64,151 @@ Windows-SSD      4096
 WinRE_DRV        4096
 SYSTEM           4096
 
+The block size cannot be changed dynamically unless the partition is formatted.
+The hard disk is group of logical blocks (which are group of sectors). 
+Logical blocks can be identified by the numbers assigned to them.
 
-The block size cannot be changed dynamically unless the partition is formatted. 
 -------------------------------------------------------------------------------------------------------------------------------
 
 SESSION 21: (Refer session 21 notes for diagrams)
 
+File: Unit of data, spread across "NON CONTIGUOUS" 
+logical blocks on the same partition of the hard disk.
 
+Why file is scattered across blocks in non contiguous fashion? 
+Well, just imagine if files are continuesly stored on logical blocks. 
+
+(Let's take a hypothesis for example)
+FB1: Logical block allocated to store file 1 data 
+FB2: Logical block allocated to store file 2 data
+
+Let's imagine this is how they are stored on logical blocks of disk (partition) 
+FB1 FB1 FB1 FB2 FB2 
+
+Now, what if file 1 grows in size (down the line) and a fourth logical block is 
+needed to store file 1 (FB1) to incoming data. 
+
+Where would we fit in the incoming data. Where would we "fit in" the fourth logical 
+block needed for file 1 data? 
+Would we move data on FB2(logical block alloted to store data of file 2) 
+to right and then allocate the recently vaccated logical block 
+to file 1 data? 
+
+(Does it look like this now?) 
+FB1 FB1 FB1 FB1 FB2 FB2 
+
+But is it efficient if large numbers of blocks are alloted to store file 2 data
+Would we shfit data on every logical block (FB2) to right ?
+
+This looks tedious. 
+Hence files are stored or "SCATTERED" across random logical blocks. 
+
+
+Need of metablock? 
+Let's say my resume file is scattered across logical blocks no; 7, 17 and 4
+But who or how OS is gonna remember where my resume file is saved ? 
+On what logical blocks ? And in what sequence? 
+Let's say if I want to read resume pointed by OS on logical block 7, 17 and 4? 
+Then in what order should I start reading the logical block? 
+
+Thus, a metablock is needed for "EACH FILE" which stores, 
+on what logical blocks is the file stored and in what order 
+Each file has a metablock which stores order of logical blocks on which it is stored. 
+But the metablock of fileS is stored in contiguous fashion
+(Acess to its metablock pretty much reveals contents of the file)
+
+
+How to access the metablock or metablock section? 
+The operating system allocates index node/inode (unique identity) to each file. 
+This inode of file can be seen in linux with command "ls -i". 
+These inodes start from value 1
+(Let's call this inode as "I")
+
+Also metablocks of files are stored continuesly from certain logical blocks or logical block location
+(Let's call it starting address of the metablock or "S")
+These metablocks of files give us contents of file. 
+But how to access the metablock itself?
+
+metablock of a file = S + I - 1
+S: Starting address of metablocks  
+I: Index node or inode of file
+
+Once metablock of file is accessed, data can be accessed too. 
+So everything depends on I / index node (majorly) to read a file, 
+Because index node changes from file to file where as S 
+(starting address of metablocks) remains constant.
+
+INode of a file gives location of its metablock and subsequently 
+the data of file.  
+
+Hence a directory (which is also a file) stores name of each file stored in it 
+against its inode 
+
+
+Directory or folder storage: 
+We just saw a file can be accessed with its inode. 
+And a directory consists of multiple files 
+(and also folders but lets assume files as of now) 
+So if a folder has many files, what a folder might be storing 
+Obviously, inodes of all the files stored in itself. 
+
+Let's say we have a directory called 'Documents' 
+in which we have saved resume file and notes file. 
+Let's assume inode of resume as 1 
+Let's assume inode of notes as 2
+
+Even though Documents is a folder, 
+(it acts as file) and stores in itself 
+
+file name   inode
+resume        1
+notes         2
+
+once inode of resume and notes is accesseed 
+their metablocks can be accessed and subsequently
+data of these files could be accessed. 
+
+
+Nested Directory: 
+Let's assume Documents folder has nested folder 
+called "SESSIONS (inode 3)" 
+
+Then Documents folder would be storing  
+
+file name   inode
+resume      1
+notes       2
+SESSIONS    3
+
+With access to sessions' inode 
+its metablock and data could be accessed 
+
+Let's assume contents of SESSIONS file as  
+SESSION1(inode 4) and SESSION2(inode 5)
+
+Once we access data of SESSIONS, it would look like 
+
+file name   inode
+SESSION1    4 
+SESSION2    5
+
+Why? because sessions is a directory 
+which stores name and inode of each file stored in itself 
+
+Once inodes of files SESSION1 and SESSION2 is accessed 
+Metablock and data of those files could be accessed too. 
+
+---------------------------------------------------------------------------------
+
+Process, executable and header files 
+
+When an executable file, is loaded into RAM(via program loader), it becomes a process. 
+Process is running instance of executable file.
+
+Although an executable consists of mainly machine code (binary), 
+machine code in itself is not enough to be executed. 
+When machine code is given a header by the OS. It becomes executable 
+Machine code + header = executable file 
+
+Too see header of an executable, use command in linux; 
+od -bc {filename} | head
