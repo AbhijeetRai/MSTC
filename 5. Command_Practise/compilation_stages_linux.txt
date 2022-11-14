@@ -1,0 +1,40 @@
+GCC does the following for the programmer 
+preprocessing 
+compilation (by default, directly gives executable file to run, once program is compiled)
+assembling (converting .S into .o, assembly into machine code/ object code) 
+linking (link some libc code to object or machine code)
+
+When you invoke GCC, it normally does preprocessing, compilation,
+assembly and linking. The "overall options" allow you to stop
+this process at an intermediate stage. For example, the -c
+option says not to run the linker. Then the output consists of
+object files output by the assembler.
+(Then run the linker, then run the code)
+
+-E flag:  Stop after the preprocessing stage; do not run the compiler proper
+
+
+Compliation stages in Linux: 
+
+1. gcc -S -o hello.S prg1.c
+gcc: Compile 
+-S: but do not assemble yet (do not give me .o object file)
+-o hello.S: compile and put output in hello.S assembly file 
+prg1.c: source code file
+
+2. as -o hello.o hello.S 
+as: assemble 
+-o hello.o: put output in hello.o (machine code)
+hello.S: source file 
+
+(The machine code is not enough yet)
+3. ld -o hello -lc -dynamic-linker /lib/ld-linux.so.2 hello.o -e main 
+According to book C primer plus by Stephen Prata, the machine code given by assembler is not enough. 
+Because our object code does not contain machine code for libc functions like printf and scanf 
+(Machine) code for libc functions and startup code is not yet linked to our machine code yet. 
+Well,which is why a linker is needed that will dynamically link these machine codes 
+to our .o file and make the program executable and ready to run now.
+
+And when executable is ran, it is loaded by OS
+execve systemcall is loader 
+ntcreateprocessFx
