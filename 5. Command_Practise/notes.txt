@@ -1,0 +1,62 @@
+Commands we use in linux are either external or internal commands of the Operating System.
+External commands are the commands which are saved as executable files at some standard path. 
+
+For example, gcc is an external command saved at /usr/bin/gcc where gcc is gnu compiler collection
+as is an external command saved at /usr/bin/as where as is assembler
+ld in an external command /usr/bin/ld where ld stands for link editor
+---------------------------------------------------------------------------------------------
+
+Generally, in the C language, a library is precompiled machine code and 
+generally machine code of built in algorithms like (printf and scanf)
+
+(Since definition of these functions or algorithms are not in header files)
+(Header files only have declaration of such built in algorithms) 
+
+The libraries are "LINKED" by the linker at runtime, later. 
+The modularisation of libraries and compiling it seperately and linking them later 
+can help us to test, develop and debug source code (later programmed into machine) independently. 
+
+The STANDARD C library(libc consisting precompiled machine code), 
+which has implementation of algorithms like printf and scanf is 
+/lib/i386-linux-gnu/libc-2.23.so 
+
+libc-2.23.so is standard library. 
+Machine code given to us of our source code by assembler is not enough 
+We must link this standard library to our machine code and when we do so 
+
+REMOVE PREFIX LIB (from name of library)
+REMOVE VERSION (-2.23 from name of library)
+REMOVE EXTENSION (.so from name of library)
+
+So only 'c' remains from the name of libc-2.23.so
+and we use -lc flag to link with our machine code via linker
+where -l is link flag and 'c' is the name of 
+libc-2.23.so library after removing prefix lib, version(-2.23) and extension (.so)
+-----------------------------------------------------------------------------------------------
+
+Since libraries have code in machine language, they are binary files
+Libraries can be classified into two types: static link library and dynamic link library 
+Such precompiled libraries come with extensions in windows and linux 
+
+Extensions are as follows: 
+                                Windows                                         Linux
+    static link library         .lib or static link library              .a or archive file 
+    dynamic link library        .dll or dynamic link library             .so or shared object file
+
+----------------------------------------------------------------------------------------------------
+In the Linux operating system, dynamically linked libraries follow a naming convention 
+libc-2.23.so 
+
+prefix 'lib' 
+name (is c in this case) 
+-2.23 (version)
+.so (extension)
+-----------------------------------------------------------------------------------------------------
+
+A linker is needed to link libraries to our source code. 
+Just like static and dynamic link libraries. There are 
+static to link static link libraries and 
+dynamic linkers for linking dynamically link libraries
+
+/usr/bin/ld is static linker is Linux 
+/lib/ld-linux.so.2 is dynamic linker in linux

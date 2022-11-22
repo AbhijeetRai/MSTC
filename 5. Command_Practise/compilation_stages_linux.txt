@@ -18,23 +18,81 @@ Compliation stages in Linux:
 
 1. gcc -S -o hello.S prg1.c
 gcc: Compile 
--S: but do not assemble yet (do not give me .o object file)
+-S: but do not assemble yet (do not give me .o object file, do give me .S assembly file)
 -o hello.S: compile and put output in hello.S assembly file 
 prg1.c: source code file
+-------------------------------------------------------------------------------------
 
 2. as -o hello.o hello.S 
-as: assemble 
+as: assemble (translate assembly .S into .o object code or machine code)
 -o hello.o: put output in hello.o (machine code)
 hello.S: source file 
+--------------------------------------------------------------------------------------
 
 (The machine code is not enough yet)
 3. ld -o hello -lc -dynamic-linker /lib/ld-linux.so.2 hello.o -e main 
 According to book C primer plus by Stephen Prata, the machine code given by assembler is not enough. 
 Because our object code does not contain machine code for libc functions like printf and scanf 
-(Machine) code for libc functions and startup code is not yet linked to our machine code yet. 
-Well,which is why a linker is needed that will dynamically link these machine codes 
-to our .o file and make the program executable and ready to run now.
 
+i) (Machine) code for libc functions 
+ii) and startup code 
+is not yet linked to our machine code yet. 
+Well,which is why a linker is needed that will dynamically link these machine codes 
+and startup to our .o file and make the program executable and ready to run now.
+
+ld: link editor 
+-o hello: create an executable as hello 
+-l: dynamically link 
+c: library c / libc-2.23.so after removing prefix lib, version -2.23 and extension. so
+/lib/ld-linux-so.2: is dynamic linker 
+hello.o : link with hello.o
+-e main: entry point is main
+
+Still, only libc code for built in algorithms is not enough to run program. 
+crt (C RUNTIME LIBRARY) is needed as well(which is implictly linked at this stage). 
+
+So for linux, 
+our machine code + libc + CRT = executable
+CRT has files like 
+crt1.o 
+crti.o
+crtn.o
+crtbegin.o
+crtend.o 
+
+crtend.o has startup code (link between os and program) _start 
+which subsequently calls entry point function main
+
+CRT enables C programs to start and run, loader gives 
+control to crt which then calls entry point function via _start
+
+But you would need different startup code(CRT) for Windows than you 
+would for Linux because these systems handle programs differently from one another. 
+
+--------------------------------------------------------------------------------------
+MSVCRT.DLL:  is the C standard library for the Visual C++ (MSVC) compiler from version 4.2 to 6.0. 
+ucrt.lib : is one of c runtime library in windows
+--------------------------------------------------------------------------------------
 And when executable is ran, it is loaded by OS
 execve systemcall is loader 
 ntcreateprocessFx
+--------------------------------------------------------------------------------------
+
+(On side note) 
+/usr/lib/gcc/i686-linux-gnu/5/cc1 prg1.c 
+is same as gcc -S -o prg1.s prg1.c 
+It gives us assembly file, without giving machine code 
+because when -S flag is used with gcc it calls cc1 command itself. 
+
+Directly calling cc1 command does the same thing for us. 
+Also as almost every command in linux is saved as executable 
+(called external command in Linux). 
+
+And path of that executable command is saved in standrad PATH, 
+invoking that command directly works, without giving full path of the command 
+
+cc1's path is stored in PATH, 
+hence it cannot be invoked directly without giving full path of cc1 
+If done so, an error is prompted, cc1 command is not found. 
+
+Give full path of cc1 while invoking it

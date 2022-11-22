@@ -1,0 +1,34 @@
+In my little observation and understanding, when C code is translated into assembly 
+local variables are not moved into ".section .data" space
+
+Why? Because, in programming either we 
+define data using data definition statements (put into .section .data), 
+or manipulate data using data manipulation statements (write logic) 
+we may choose to use temporary (local variables) in logical statements(put into .section .text as CPU instruction) 
+but overall we do not define whole program wide scoped data in local variables. 
+
+And mostly global variables which are source code wide scoped data are put into .section .data
+And local data (variables) mostly used with "DATA MANIPULATION" are put into .section .text
+
+---------------------------------------------------------------------------------------------------------
+
+ROUGHLY, data definition statements in assembly or (global vars) are 'supposed' to be stored in RAM 
+Hence, they are properly given space in .section .data with their variable name and assembler directive 
+(.int or .byte or whatever)
+
+While (I do not know yet how stack is pushed) local variables are seen 
+being loaded into CPU registers, when .c is converted to assembley .s file
+
+Mostly assuming, because local variables are part of logical CPU instructions(stored into .section .text)
+Hency they might be assigned registers directly as of now (I am assuming some part of RAM will be given to them later)
+----------------------------------------------------------------------------------------------------------
+
+
+When declared globally in c file and translated to assembley, data types are given following assembler directives 
+(works regardless of signed or unsigned)
+
+char            :       .byte 
+short           :       .value
+int             :       .long 
+long            :       .long
+long long       :       .long .long

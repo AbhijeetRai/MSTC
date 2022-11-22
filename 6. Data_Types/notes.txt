@@ -1,0 +1,31 @@
+The C programming language ships with 3 data types mainly(character, int and float) which are further classified as 
+
+character                           short                           float
+unsigned character                  unsigned short                  double 
+                                                                    long double
+                                    int 
+                                    unsigned int 
+
+                                    long int 
+                                    unsigned long int 
+
+                                    long long int 
+                                    unsigned long long int
+
+
+Datatype                                size (in bytes)                         range
+
+character                                   1                                 -128 to 127
+unsigned character                          1                                 0 to 255
+
+short                                       2                                  -32768 to 32767
+unsigned short                              2                                  0 to 65535
+
+int                                         4                                  -2147483648 to 2147483647
+unsigned int                                4                                  0 to 4294967295
+
+long int                                    4                                  -2147483648 to 2147483647
+unsigned long int                           4                                  0 to 4294967295
+
+long long int                               8                                  -9223372036854775808 to 9223372036854775807
+unsigned long long int                      8                                  0 to 18446744073709551615
