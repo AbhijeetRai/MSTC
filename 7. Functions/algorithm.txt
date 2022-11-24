@@ -1,3 +1,0 @@
-Algorithm: is a specification of definite, finite series of steps 
-which accept input data satisfying certain or no precondition 
-and convert input into output satisfying cetain post condition

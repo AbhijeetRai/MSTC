@@ -19,7 +19,7 @@ Hence, they are properly given space in .section .data with their variable name 
 While (I do not know yet how stack is pushed) local variables are seen 
 being loaded into CPU registers, when .c is converted to assembley .s file
 
-Mostly assuming, because local variables are part of logical CPU instructions(stored into .section .text)
+Mostly "assuming", because local variables are part of logical CPU instructions(stored into .section .text)
 Hency they might be assigned registers directly as of now (I am assuming some part of RAM will be given to them later)
 ----------------------------------------------------------------------------------------------------------
 
