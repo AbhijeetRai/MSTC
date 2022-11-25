@@ -1,3 +1,5 @@
+(An algorithm is basically a function in C in layman terms)
+
 Algorithm: is a specification of definite, finite series of steps 
 which accept input data satisfying certain or no precondition 
 and convert input into output satisfying cetain post condition
@@ -5,3 +7,15 @@ and convert input into output satisfying cetain post condition
 Size of a function is sum of all instructions' size present in the functions 
 Because these instructions are pushed to text section where as local variables go to stack frame 
 Each instruction's size varies from 1 byte to 17 bytes.
+
+
+OBSERVATION:    
+As of now, we know that in startup code, the call to main is something like this: 
+exit(main()), where exit keeps waiting for return exit code of main
+Also when we return 0 from main and follow steps of toolchain one by one 
+preprocess(cpp or gcc -E) to compile(cc1 or gcc -S) to assemble (as) to link (ld)
+And when we run final executable, code runs but with segmentation fault at the end. 
+This segmentation fault does not happen we directly call exit from main
+
+(Also, In both the cases, whether return 0 or exit(0) the segmentation fault is 
+not seen when executable is directly created post compilation: gcc prg1.c)

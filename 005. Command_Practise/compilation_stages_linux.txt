@@ -64,7 +64,7 @@ crtend.o has startup code (link between os and program) _start
 which subsequently calls entry point function main
 
 CRT enables C programs to start and run, loader gives 
-control to crt which then calls entry point function via _start
+control to crt which then calls entry point function(often, main) via _start
 
 But you would need different startup code(CRT) for Windows than you 
 would for Linux because these systems handle programs differently from one another. 
