@@ -1,0 +1,33 @@
+Just like there are standard exeuctable path and standard library path, there exists standard include path as well 
+
+standard exeuctable path: 
+    path where most of the (os) exeuctables (like command) are kept. All the standard paths where most exeuctables 
+    are listed in variable PATH. Use command echo $PATH to see standard paths where exeuctables are kept 
+    Whenever, an exeuctable (without giving full path) is given to OS. It's path is searched in the PATH variable. 
+    If full path of an exeuctable is not available in PATH and it is given to os to be exeucted, then either 
+    include path of the exeuctable in PATH variable or give full path of the exeuctable to the OS 
+
+
+standard library path: 
+    is the location where machine code of functions (algorithms) of "C" is kept. 
+    Whenever any .so library in linux is linked with ld. 
+    It looks for that library in the locations output(ted) by command: 
+Command -->    ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\012
+(ldconfig -v could also be used to see )
+
+
+standard include path: 
+    It is location, where compiler looks by default when a header file is included 
+    without giving full path in angular bracket. #include <stdio.h>
+    standard include path can be listed for c and cpp as follows: 
+    c:  gcc -xc -E -v -
+    cpp: gcc -xc++ -E -v -
+-------------------------------------------------------------------------------------------------------------
+
+PREPROCESSING: 
+cpp prg1.c > hello.c is same as gcc -E prg1.c > hello.c 
+Both the commands dump preprocessed C code in hello.c 
+I doubt, there might be chances of -E flag calling cpp (C pre processor) internally.
+
+Every statement beginning with # is meant for preprocesser, it is not visible to compiler. 
+In pre processing, pre processor dumps content of header file into source program

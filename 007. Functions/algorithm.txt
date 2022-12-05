@@ -3,19 +3,31 @@
 Algorithm: is a specification of definite, finite series of steps 
 which accept input data satisfying certain or no precondition 
 and convert input into output satisfying cetain post condition
-
+----------------------------------------------------------------------------------------------
 Size of a function is sum of all instructions' size present in the functions 
 Because these instructions are pushed to text section where as local variables go to stack frame 
 Each instruction's size varies from 1 byte to 17 bytes.
-
-
+------------------------------------------------------------------------------------------------
 OBSERVATION:    
 As of now, we know that in startup code, the call to main is something like this: 
 exit(main()), where exit keeps waiting for return exit code of main
 Also when we return 0 from main and follow steps of toolchain one by one 
 preprocess(cpp or gcc -E) to compile(cc1 or gcc -S) to assemble (as) to link (ld)
 And when we run final executable, code runs but with segmentation fault at the end. 
-This segmentation fault does not happen we directly call exit from main
+This segmentation fault does not happen we directly call exit 0 from main
 
 (Also, In both the cases, whether return 0 or exit(0) the segmentation fault is 
 not seen when executable is directly created post compilation: gcc prg1.c)
+-------------------------------------------------------------------------------------------------
+In C, lots of things are dependent on type declaration. Just like compiler needs type of data before 
+converting .c into .s. Similarly, it needs type of function in function type declaration. It needs 
+return type of function and formal parameter(s') type
+------------------------------------------------------------------------------------------------
+return code of C program (main) is stored in EBX/EAX register, which can be print using command 
+(echo $?) after running the C program. 
+0 by default in case of int main(), when nothing is returned by int main, 0 is returned by itself. 
+Garbage value in case of void main(), actually void main is illegit in C, that it should not be used
+------------------------------------------------------------------------------------------------
+On side note
+(In my current understanding, CPU has an accumulator(eax), an instruction pointer or program counter (IP/PC)
+and a stack pointer)

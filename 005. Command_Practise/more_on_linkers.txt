@@ -1,0 +1,34 @@
+When our machine code is dynamically linked with libc using ld command. 
+libc implicitly and automatically ships with a.out onto the RAM, by default, 
+When the program is loaded. (The program is loaded into program memory part of the RAM)
+
+In above process, address of libc functions change so the job of linker(s) apart from creating 
+final a.out or .exe is 
+    i) Function address relocation 
+    ii) Replace function call with function address 
+---------------------------------------------------------------------------------------------
+Dynamic linking: 
+In dynamic linking, library functions are inside dynamic linked libraries 
+which are .so or .dll files. These libraries do not join a.out or .exe 
+on the hard disk but on RAM. 
+
+When a.out is loaded on RAM and libc has been dynamically linked using ld command via 
+-dyanmic-linker /lib/ld-linux.so.2, it is implicitly loaded to program memory of RAM 
+with a.out. This is "IMPLICIT DYNAMIC LINKING"
+
+"EXPLICIT DYNAMIC LINKING" will be seen in "SYSTEM PROGRAMMING"
+-----------------------------------------------------------------------------------------------
+Static linking: 
+When a library (C functions implemented in machine code) are statically linked 
+with executable (.exe or a.out) on hard disk itself, it is static linking. 
+Such libraries are kept in .a or .lib files
+------------------------------------------------------------------------------------------------
+Command we use to link: 
+ld -o hello -lc -dynamic-linker lib/ld-linux.so.2 hello.o -e main
+
+Wait a minute? Hol up (meme)... 
+What is static linker (ld) doing here with dynamic linker (ld-linux.so.2)
+
+Well static linker "ld" not only creates exe (fulfilling one of roles of linker)
+but also provides dynamic linker and libc(path), so that when a.out is later 
+shipped to RAM, libc and dynamic linker should be shipped too.

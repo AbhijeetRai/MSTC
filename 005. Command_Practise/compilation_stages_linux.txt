@@ -44,6 +44,7 @@ ld: link editor
 -o hello: create an executable as hello 
 -l: dynamically link 
 c: library c / libc-2.23.so after removing prefix lib, version -2.23 and extension. so
+(library path: /lib/i386-linux-gnu/libc-2.23.so )
 /lib/ld-linux-so.2: is dynamic linker 
 hello.o : link with hello.o
 -e main: entry point is main

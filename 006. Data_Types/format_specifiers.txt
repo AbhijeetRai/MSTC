@@ -1,0 +1,31 @@
+Use appropriate format specifiers for appropriate data types 
+For example: 
+    char ch = 'A'
+To print ascii of 'A', we could use %d to print variable ch 
+Also, we could use %hhd to print variable ch. Both would give result 65
+Just because, we can use %d to print ch, does not mean we should. 
+
+Variable ch itself points to 1 byte memory location and if we 
+use %d, 4 bytes are printed, format specifier %d tells to print 4 bytes. 
+What if the other 3 bytes are not zeroed out or padded 
+or result in segmentation fault(3 bytes are inaccessible). 
+Hence it is better to stick to best practises and use %hhd, which would use 1 byte only. 
+
+Hence use relevant format specifiers, as they tell printf, how many bytes to print or 
+what to print
+
+Data type       format specifier                Data type           format specifier 
+char                %hhd                        unsigned char           %hhu
+short               %hd                         unsigned short          %hu 
+int                 %d                          unsigned int            %u
+long                %ld                         unsigned long           %lu 
+long long           %lld                        unsigned long long      %llu
+
+
+Similarly, octal and hex unsigned format specifier 
+                    octal           hex 
+char                %hho            %hhx 
+short               %ho             %hx
+int                 %o              %x 
+long                %lo             %lx 
+long long           %llo            %llx
