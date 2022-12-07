@@ -12,7 +12,7 @@ EVEN IF THE PROCESSOR REMAINS THE SAME
 
 ------------------------------------------------------------------------------------------------------------
 
-Why object file os one os does not run on another? 
+Why object file of one os does not run on another? 
 Because, assembler gives instruction to static linker 
 about implict dynamic linking in the obj file. 
 
