@@ -1,0 +1,20 @@
+Why the assembly code for ubuntu-intel does not work for windows-intel even though processor is same? 
+
+In C code, either we do 
+    i) Data definition / data manipulation 
+    ii) Input / output 
+    iii) use system services (create file, read file)
+
+assembly for data definition and manipulation does not change across os 
+but assembly for system services changes across os. 
+Hence assembly written for one os does not work on another 
+EVEN IF THE PROCESSOR REMAINS THE SAME 
+
+------------------------------------------------------------------------------------------------------------
+
+Why object file os one os does not run on another? 
+Because, assembler gives instruction to static linker 
+about implict dynamic linking in the obj file. 
+
+And since assembler varies from os to os, 
+object file of one os does not seem to work on another
