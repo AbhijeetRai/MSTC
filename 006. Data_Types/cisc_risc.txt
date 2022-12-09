@@ -1,0 +1,45 @@
+CISC: COMPLEX INSTRUCTION SET COMPUTER:
+
+Early computers were of CISC type. A 'complex' instruction bascially 
+is an amalgamation (unit/merge) of multiple instructions. 
+Many (2 or 3) instructions are combined to form a complex instruction. 
+(Consider the analogy)
+complex instruction = instruction1 + instruction2 + instruction3 
+
+Since CISC combined multiple instructions into one, it was belived to be efficient. 
+(Since earlier processors had less processing power, CISC gave them less instructions to process)
+-------------------------------------------------------------------------------------------------
+
+RISC: REDUCED INSTRUCTION SET COMPUTER
+RISC architecture did not believe in complex instructions. It broke down complex (mixture of) instructions 
+into each seperate instruction to have more 'SIMPLER' instructions. With MIPS computers emerging into mid 80s 
+RISC ISA(instruction set architecture) became widely accepted 
+----------------------------------------------------------------------------------------------------
+
+                        CISC                                                    RISC
+
+At C level:             a++                                                     a = a + 1 
+
+At assembly level:      incl a                                          movl a, %(to some register)
+                                                                        addl $1, %(to some register)
+                                                                    (and maybe move register data back to a)
+
+At mcdonald's level     order meal once                                         i) Order coke 
+                        (combo of coke, fries, burger)                          ii)then order fries 
+                                                                                iii)then order burger
+--------------------------------------------------------------------------------------------------------
+Intel's pro gamer move: 
+Although CISC assembly equivalent of a++ is incl. 
+When .c file (a++) is translated to assembly .s 
+incl is converted into movl and addl instructions of RISC
+
+Because, intel implicitly (automatcially) converts CISC instructions to RISC 
+According to the book: x86 Instruction Set architecture by Tom Shanley 
+Intel uses a dynamic translator to convert CISC instructions into RISC instructions on the fly. 
+And those RISC instructions are called micro ops.  
+-------------------------------------------------------------------------------------------------------
+
+Why, they might have done that? 
+GUESS: When everything was moving from CISC ISA to RISC ISA. 
+Everything written ever (compiler, code, softwares, services) would be needed to rewritten to RISC 
+Hence, they might have added CISC to RISC translator. 
