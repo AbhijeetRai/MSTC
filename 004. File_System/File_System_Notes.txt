@@ -46,7 +46,7 @@ We need to do it 2^30/2048 = 2^30/2^11 = 2^19 times only.
 
 HENCE, the read /write takes places at logic block level but not at sector level.
 
-As we go on increasing sector size, read / write keeps getting efficinet but will lead to memory 
+As we go on increasing logical block size, read / write keeps getting efficinet but will lead to memory 
 wastage if file sizes are much smaller. 
 Hence finding ideal logical block size is important (with respect to file size).
 
