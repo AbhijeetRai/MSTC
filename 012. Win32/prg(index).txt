@@ -1,0 +1,10 @@
+Name                Description
+
+prg1.c              First program using WINAPI. showing how to print "ABHIJEET RAI - ROLL NUMBER: 154 - CPA MSTC 3"
+prg2.c              Concept of device context & random notes
+prg3.c              Hello World (in corner of) GUI
+prg4.c              Hello World (in middle of) GUI
+prg5.c              Program to print student array of length 75 but no responsive scroll bar
+prg6.c              Showing to print "ABHIJEET RAI - ROLL NUMBER: 154 - CPA MSTC 3" in middle of window with scoll bar
+prg7.c              Student array of length 75 with horizontal and vertical scroll bar
+prg8.c              Advanced scroll bar

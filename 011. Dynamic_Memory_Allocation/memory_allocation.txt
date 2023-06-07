@@ -1,0 +1,27 @@
+Why statically allocated memory is initialised with value 0 ? 
+Why dynamically allocated memory is not initialised with value 0?
+
+When a variable is statically declared (globally), during exe creation, 
+it is put in bss (I ASSUME) and 0 is put in it in one go.  
+
+Local declared variables or variables declared with malloc are provided memory dynamically
+It means, when a local variable comes into existence when stack frame of function is pushed 
+OS simply does not have bandwidth to set it to 0. And when memory is provided from malloc call 
+Memory is provided from page size 4 KB from heap. 
+
+That page size of 4kb is given to heap by the OS as buffer, but os does not set 4kb page to 0 
+Why? 
+Because, 4KB = 4096 bytes of space on RAM, 
+(CPU constantly read / writes data on RAM in certain bytes at a time called processor supported word size) 
+In many standard processor, maximum word size is 16 bytes. 
+
+Now imagine trying to zero out 4096 bytes but 16 bytes at a time. 
+We need to do 4096/16 write operations. It is 256 times (256 CPU cycles to write data on memory)
+256 cycles of CPU to perform Read/Write operation on memory. 
+
+256 CPU cycles are enough to read / write data from/to memory to execute an algorithm. 
+Hence OS does not decide to memset 0 the 4kb page size by default. 
+
+Progammer fetches certain bytes from 4kb page size using malloc. 
+Say, 4 bytes to 12 bytes or n bytes and then sets it to 0 using memset 
+Or uses calloc to fetch those many bytes from the 4kb page and set it to 0 

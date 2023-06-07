@@ -1,0 +1,16 @@
+Principle: The meaning of operator is based on the type of its operands. 
+[The semantics of operator are evalated in the context of types of their operand]
+
+
+*Derefernce operator is sensitive to pointer type. 
+For example if dereferencing char*, 1 byte of memory is read
+If dereferencing double*, 8 bytes of memory is read and so on. 
+
+.Dot and ->Arrow operator is sensitive to struct member offset
+struct node { int data }my_node;
+my_node.data is accessed, data's offset from struct's base address is checked 
+Same goes for accessing data with pointer and arrow 
+
+Pointer (+ arithmetic) is dependent pointer type 
+int*    var + 1, moves var ahead by 4 bytes 
+short*  var + 1, moves var ahead by 2 bytes

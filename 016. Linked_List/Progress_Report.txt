@@ -1,0 +1,24 @@
+Over time, Computers have evolved so much that they have become complex. 
+The underlying electronics and mathematics are abstract from users or even programmers.
+
+Thus, I am on an expedition to understand, explore and innovate computing. 
+The journey looks to be exhausting. But I am an embodiment of patience. 
+Alas! Rome was not built in a day. So why rush? Good things take time. 
+
+And I am no retard. I have made some progress. 
+For example, when SEG_FAULT occurs in a C program running on the Windows Operating System. 
+The terminal does not show or print anything. It remains indifferent. 
+Windows unlike the Linux would not make it explicit for the programmer that a SEG_FAULT has occurred in the code. 
+However, the cursor on terminal would blink in some 'weird' way. 
+The cursor goes on and off for a tiny fraction of a second. (This is observed with repeatitions).
+
+I am no winner, no champion. But, just a looser who knows to try again and again. 
+So far, I have typed so many memory mapping codes. I have made many 'mistakes' while mapping, accessing or freeing the memory. 
+Even if Windows does not tell me that a SEG_FAULT has occured somewhere in the code. 
+**Even if my code has no print statement**, even if Windows prints nothing on the terminal 
+I will wait for the cursor to blink (probably in that weird way). 
+I can instantly point out whether a SEG_FAULT has occured  based on the behaviour of the blinking cursosr. 
+
+Well, The world of the computing is so vast. It might not even be the beginning of the quest, the voyage or the expedtition. 
+But this is the level of one-ness(unity) I aspire to acquire with the computer. 
+This is the level of expertise I want to train for

@@ -1,0 +1,27 @@
+while(SUCCESS) {
+        
+    if(run1 == list1) {
+        while(run2 != list2) {
+            insert_end(merged_list, run2->data);
+            run2 = run2->next;
+        }
+        break;
+    }
+    
+    if(run2 == list2) {
+        while(run1 != list1) {
+            insert_end(merged_list, run1->data);
+            run1 = run1->next;
+        }
+        break;
+    }
+    
+    if(run1->data <= run2->data) {
+        insert_end(merged_list, run1->data);
+        run1 = run1->next;
+    
+    } else {
+        insert_end(merged_list, run2->data); 
+        run2 = run2->next;
+    }   
+}

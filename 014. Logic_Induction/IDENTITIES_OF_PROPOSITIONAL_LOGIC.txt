@@ -1,0 +1,33 @@
+not             ~
+and             ^
+or              v
+equivalent      == 
+
+
+Identity Laws
+    p ^ T == p 
+    p v F == p 
+
+Domination Laws
+    p ^ F == F 
+    p v T == T 
+
+Idempotent Laws 
+    p ^ p == p 
+    p v p == p 
+
+Commutative Laws 
+    p ^ q == q ^ p 
+    p v q == q v p 
+
+Associative Laws 
+    (p ^ q) ^ r == p ^ (q ^ r) 
+    (p v q) v r == p v (q v r)
+
+
+Sir, ek "sukshma" prashna vicharu, correct me, If I am wrong: 
+But can we understand, "ANDING"; when assumed commutative in programming can be error yielding
+(speically in cases of short circuting) for example 
+
+when p ^ q; for p == False, compiler does not (correct me) bother to evaluate q and picks false of p by evaluating it 
+for example insertion sort ka: (K >= 0 && pa[k] > tmp) ko (pa[k] > tmp && k >= 0) kia seg fault aaega sidhe for k < 0

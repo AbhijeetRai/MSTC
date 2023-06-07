@@ -1,0 +1,71 @@
+GNU C compiler x86 
+    Default calling convention: C calling convention 
+    
+    To force Pascal: 
+        // Decl 
+        ret_type __attribute__((stdcall)) function_name(formal_param_list); 
+
+        // Def
+        ret_type __attribute__((stdcall)) function_name(formal_param_list)
+        {
+
+        }
+
+    To force fast call covention: 
+        // Decl
+        ret_type __attribute__((regparm(3))) function_name(formal_param_list); 
+
+        // Def
+        ret_type __attribute__((regparm(3))) function_name(formal_param_list)
+        {
+
+        }
+
+        Upto three params goto reg, subsequent params on stack. 
+        params on stack cleared by caller 
+
+        1st param -> eax 
+        2nd param -> edx 
+        3rd param -> ecx 
+
+GNU C Compiler x86_64 
+
+    Default calling convention : fastcall 
+    Upto first six parameters : register 
+    subsequent params: stack 
+    params on stack if any are cleared by caller 
+
+    1st -> rdi 
+    2nd -> rsi 
+    3rd -> rdx 
+    4th -> rcx 
+    5th -> r8 
+    6th -> r9 
+
+    C Calling convention force 
+
+
+    // DECL 
+    ret_type __attribute__((regparm(0)))function_name(formal_param_list); 
+    OR 
+    ret_type __attribute__((cdecl)) function_name(formal_param_list); 
+
+    // DEF
+    ret_type __attribute__((regparm(0))) function_name(formal_param_list)
+    {
+
+    }
+    OR 
+    ret_type __attribute__((cdecl)) function_name(formal_param_list)
+    {
+
+    }
+
+    GNU C x86_64 DOES NOT ALLOW STDCALL. 
+
+MICROSOFT COMPILER 
+Default: __stdcall
+STANDARD CALLING CONVENTION: __stdcall 
+C CALLING CONVENTION: __cdecl 
+FASTCALL : __fastcall 
+

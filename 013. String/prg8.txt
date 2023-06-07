@@ -1,0 +1,50 @@
+/*
+* Function: split_string
+* -----------------------
+* splits the string based on seperator: E.g: "/" or "-" 
+*
+* source: string which is to be splitted 
+* seperator: seperator on which to split the source string 
+* string_array_pointer: pointer to char**(pointer of array of strings), return value as paramter, returns array of spliited string
+*
+* returns: number of splitted strings in the source string
+*/
+int split_string(char* source, char* seperator, char*** string_array_pointer) {
+    
+    char sep = seperator[0];
+    int source_length = string_length(source);
+
+    int prev_index = -1; 
+    int length = 0;
+
+    char** string_array = NULL;
+    int occurance = 0;
+
+    for(int i = 0; i < source_length; i++) {
+
+        if(source[i] == sep) {
+            length = i - prev_index;
+            char* temp_str = NULL;
+            temp_str = (char*)malloc(sizeof(char) * length);
+            string_copy_N_char(source + prev_index + 1, &temp_str, length - 1);
+
+            occurance += 1;
+            string_array = (char**)realloc(string_array, occurance * sizeof(char*));
+            string_array[occurance - 1] = temp_str;
+
+            prev_index = i;
+        }
+    }
+
+    length = source_length - 1 - prev_index;
+    char* temp_str = NULL;
+    temp_str = (char*)malloc(sizeof(char) * length);
+    string_copy_N_char(source + prev_index + 1, &temp_str, length - 1);
+
+    occurance += 1;
+    string_array = (char**)realloc(string_array, occurance * sizeof(char*));
+    string_array[occurance - 1] = temp_str;
+
+    *string_array_pointer = string_array;
+    return occurance;
+}

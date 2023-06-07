@@ -1,0 +1,77 @@
+CONST KEYWORD: A variable when prefixed by const is not modifiable in 'C'.
+Normally global vars go on bss/non bss depending on intial value but when qualified with const keyword
+the global vars go on rodata. 
+(A programmer by any means is not supposed to edit data on rodata, shall a programmer tries to do that)
+(His program is abrubtly terminated, leading to seg fault)
+-----------------------------------------------------------------------------------------------------------------
+                        GLOBAL NON                           LOCAL NON POINTER              LOCAL NON POINTER               GLOBAL STATIC 
+                        POINTER CONST DATA                   CONST DATA                     STATIC CONST DATA               NON POINTER DATA 
+
+Storage Location            rodata                              stack                           rodata                          rodata
+in the exe (process)
+------------------------------------------------------------------------------------------------------------------
+
+When a variable is declared constant, const becomes part of (data)type(name) of variable
+
+const float var = 1.1f 
+type(var) = const float 
+
+const long value = 11l; 
+type(value) = const long 
+------------------------------------------------------------------------------------------------------------------
+
+BACKDOOR TO MODIFY CONST DATA: 
+
+The code snippet show below was successful 
+(except warning that; address of const int is stored in int* instead of const int*)
+(type of ptr is int* and type of value is const int, type (&value) is const int*)
+(But we are storing type const int* into int*, which is ignored for time being) 
+Code works because ptr exists on stack. It would not have worked, if ptr existed in rodata
+
+#include <stdio.h> 
+int main(void) {
+
+    const int value = 10; 
+    int* ptr = &value;
+    *ptr = 20;
+    printf("%d\n", value);
+}
+-----------------------------------------------------------------------------------------------------------------
+The code shown here, does not work because value exists on rodata and we tried to change it. 
+A programmer shall never try to edit or MODIFY data on rodata section.
+
+#include <stdio.h> 
+const int value = 10; 
+
+int main(void) {
+
+    int* ptr = &value;
+    *ptr = 20;
+    printf("%d\n", value);
+}
+------------------------------------------------------------------------------------------------------------------
+The code shown here, does not work because value exists on rodata(even if it is local variable)
+and we tried to change it. 
+A programmer shall never try to edit or MODIFY data on rodata section.
+
+#include <stdio.h> 
+int main(void) {
+
+    const static int value = 10; 
+    int* ptr = &value;
+    *ptr = 20;
+    printf("%d\n", value);
+}
+-------------------------------------------------------------------------------------------------------------------
+The code shown here, does not work because value exists on rodata and we tried to change it. 
+A programmer shall never try to edit or MODIFY data on rodata section.
+
+#include <stdio.h> 
+static const int value = 10; 
+
+int main(void) {
+
+    int* ptr = &value;
+    *ptr = 20;
+    printf("%d\n", value);
+}

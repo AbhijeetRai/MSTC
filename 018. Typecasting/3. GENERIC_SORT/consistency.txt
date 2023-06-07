@@ -1,0 +1,41 @@
+It took me 417 days to implement a 
+Linux library-esque function: generic_qsort. 
+Sounds weird right! 
+
+Well it did take time, not because it was killer 
+It was me who took 417 days to clear the 
+pre-requisites such as the advanced "C" language, 
+computer arithmetic, discrete mathematics 
+and bits of computer orgranisation. 
+
+Kernel drains you, 
+it takes years to understand the pre-requisites themselves.  
+It is a penance. One must understand tasks of OS: 
+Process management, memory management, I/O, storage. 
+One should have understanding of 
+LSP(Linux System Programing), CPU architecutre, device driver. 
+Then shall he become eligible to touch the kernel code. 
+
+It takes years of study to unlock 
+this domain and probably just less than a decade to master it. 
+It is so complex, it will test your patience. 
+It does not yield result early at all. 
+
+Can you imagine, handling overhead of advanced C (killer syntax) 
+system programming with multithreading, advanced data strucutres, 
+memory management, device drivers, peripherals(disk and nics), ASSEMBLY, maths, 
+at once and write code mixing all of that in few lines. 
+
+I get fascinated while telling myself, 
+"there are people who do it in day to day life". 
+And trust me you all, they are no less than superheros. 
+
+For me, 
+I have barely built understanding of bits of multiple branches
+I do not know, how long is this gonna take. I do not know how soon 
+or how much it is gonna pay back. What I do know is, 
+"The day it yields result, that is gonna be beautiful."
+Linux or Systems at this point have evolved so much:
+"they are science as well as they are an art in themselves"
+And it takes to achieve expertise in an art. 
+Which is why, we keep trying to do it for years & years. 

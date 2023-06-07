@@ -1,0 +1,74 @@
+Jaise 2 phone kabhi unke wallpaper ke basis pe nahi compare hote hain
+Balki, apne processor, camera, etc ke basis pe compare hote hain. 
+
+Waise hi 2 operating system apne (callable) system calls ke dum par compare hote hain. 
+Ab ye system call chiz kya hai bhala ? 
+
+System call ke help se (user space me run hone wali) process 
+operating system ki services demand karti hai. 
+
+(Kaisi servies? 
+Answer: Hardware access, disk se file read kara do, camera se image read kara do
+Process create kara do, ya access to kernel services like process scheduling)
+----------------------------------------------------------------------------------------
+
+SYSTEM CALL BHI FUNCTION HI HAI, But OS ka function hai. Jo OS ke sath RAM pe load hua hai, OS ke andar. 
+Un OS ke functions (system calls) ke andar instructions likhe honge to avail the services. 
+
+To fir to hum apne (user space me run hone wali) prcoess se aram se OS ke functions call kar lenge. 
+System call ko call kar lenge aur services avail kar lenge. 
+
+Nahi, aisa nai hai because OS ke functions ka privilege hi dusra hai hum un functions ko call 
+nahi kar sakte. Aur na hi hum apne process se dusre process ke function ko call kar sakte hain 
+---------------------------------------------------------------------------------------------
+
+Hum sidha os(ke functions) ke andar entry nahi le sakte hain. 
+(Aur na hi dusre prcoess ke andar ya dusre prcoess ke function ke andar) 
+Kahne ka matlab hum (as usual) os ke function ka address ya dusre process ke function ka address utha ke 
+sidha IP (instruction pointer) as knwon as PC (program counter) me nahi dal hain sakte for execution.
+
+(IP or PC is register in CPU which points to next instruction to be executed. Size of instruction is 4 in ARM, variable in Intel)
+
+To aise me zaroorat padti hai (assembly me likhe jane wale) trap instructions ki, jo ki cpu specific hote hain. 
+Trap instruction se os ke function ke andar ya dusre process ke function ke andar enter kia ja sakta hain.
+To ab hum system call sidha call kar sakte hain nahi, because we do not know trap instructions, to ab kya karein 
+----------------------------------------------------------------------------------------------------
+
+Luckily, hume kuch karne ki zaroorat nahi, rich C library me stubs likhe hue hote hain. 
+Har system call ke lie stub hai, 1:1 mapping me.
+STUB MEANING IN PROGRAMMING: a piece of code used to stand in for some other programming functionality. 
+
+Ye stubs, ka naam system call ka hi naam hota hai, jo apne andar se bade chalaki se...  
+stub: trap instruction ka use kar ke os ke andar ya uske function ke andar enter kar jaaega. 
+Bina user ko trap instruction dikahe ya without troubling user for trap instruction 
+(which is cpu specific but different for each system call) 
+(On side note: STUBS are a good example of abstraction)
+
+Jaise maine mere (user space me run hone wale c program -> ) process se kaha fork() kar ke process create karo. 
+Hume, as user laga ki hume to system call (os ka function) use kar lia, lekin waisa hua hi nahi. 
+
+Actually, fork naam ka stub call ho gaya, jo ki likha assembly me tha, aur machine code me assembled ho ke 
+libc-2.23.so me pada hua tha. Ye hamare program ke sath (libc library) link hui. Stub call hua, usne trap instruction 
+use kar ke actual fork system call me entry le li. Jiska access hamare (user space wali) process ko tha hi nahi. 
+
+Aur obviously hume us fork stub ka declaration dena padega (appropirate header file se usually). Because program 
+compilation stages me stub ka declaration lagega, definition to hai hi machine code me libc (libray me) jo bad me link ho jaaega.
+
+Badme system call jo return karega wo stub ke pass aeega, aur stub hume exact same chiz de dega, haamre process ko 
+-------------------------------------------------------------------------------------------------------------
+
+Ha to stub ka cunning nature nai accha laga? Thik hai fir alag alag cpu ke lie har system call ka trap instruction 
+rat ke aao, aur bindas use karo. Aur wo karne me difficult lag raha to as usual stubs use karo. Because we do use trap 
+instructions to get into OS. 
+--------------------------------------------------------------------------------------------------------------
+
+Ye to kahani ho gai linux, stubs, pre compiled machine code library linking ki... 
+Windows (and Win32 sdk) ka kya? 
+
+Jaise linux ke stubs libc-2.23.so me hain, window ke stubs ntdll.dll me hain (nt: new technology)
+Lekin windows me sidha stubs link nai hote linux jaise (jaise libc link hoti hai linux me) 
+Windows me to stub ka wrapper use karna padta hain. (user32.lib, gdi32.lib, kernel34.lib) known as subsystem.dll
+ye wrapper(api) se stub access, stub se trap instruction access, trap instruction se os access, is trha hoga. 
+
+(user32.lib, gdi32.lib, kernel34.lib) me APIS hai stub ke, in APIS ka declaration and kuch user defined datatypes 
+Windows.h me hai

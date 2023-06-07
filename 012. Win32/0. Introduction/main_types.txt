@@ -1,0 +1,14 @@
+ASCII vs UNICODE: 
+	ASCII 8 bit charachter encoding use karta hai, matlab sare characters ko 8 bit ka use kar ke present kia jaaega. 
+	Matlab, 0 se le ke 255 tak number sare character ko assign kie jaaenge, to store in computer in machine language. 
+	character is 1 byte long.
+
+	Ab agar character hi 256 se jyada represent ya store karne rahe to use UNICODE (UTF-16), jo ki 16 bits ka use kar ke, 
+	0 - 65535 characters computer me store kar sakta hai, in machine code format. Ab itni badi range me international aur local 
+	language ke characters bhi aa jate hain. UTF - 16 me charachter 2 bytes long hota hai. (Halanki, unicode me utf7, utf 32 bhi use hota hai)
+
+Depending ASCII and UNICODE representation main bhi types ke hote hain 
+
+				ASCII representation used in program				UNICODE (UTF-16) representation used in program
+CLI 					main 												wmain 
+GUI						winmain												wWinMain

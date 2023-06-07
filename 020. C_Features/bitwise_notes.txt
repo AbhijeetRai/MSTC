@@ -1,0 +1,2 @@
+https://graphics.stanford.edu/~seander/bithacks.html
+Visit this document to learn hacks and tricks of bit wise
