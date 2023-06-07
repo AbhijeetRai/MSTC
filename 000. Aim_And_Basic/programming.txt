@@ -22,3 +22,5 @@ Main Memory: Interface provided to combine the mechanisms.
 
 We can bring together mechanism of computer in any order we please, hence we are programmers (policy makers). 
 And this activity is programming.
+
+Legendary programmers have mastered Maths
