@@ -1,0 +1,49 @@
+------------------------------------------------------------------------------
+A process has 6 sections. 4 static sections and 2 dynamic sections 
+
+Static sections 
+    text - Each data manipulation statement seggregated by function by function 
+    data (non bss) - initialised global variables  
+    bss - uninitialised global variables 
+    rodata - constants and string literals 
+
+Dynamic sections 
+    Stack - Local variabels 
+    Heap - Dynamically allocated memory 
+------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------
+Rule of thumb is, "A programmer shall never try to modify data in rodata section. Shall 
+he try to do that, his code is abrubtly terminated" 
+------------------------------------------------------------------------------------
+
+
+Stack 
+-------------------------------------------------------
+(Intialised or non initialised)
+local non pointer variable: stack        
+local non pointer const data: stack
+Local array of char: stack
+--------------------------------------------------------
+
+Data 
+---------------------------------------------------------
+Global Intialised var: data 
+Local static initialised variabels: data 
+Global intialised array of char: data
+---------------------------------------------------------
+
+BSS 
+------------------------------------------------------
+Local static uninitialised variables: bss 
+uninitialised global variables: bss
+Global uninitialised array of char: bss
+------------------------------------------------------
+
+rodata 
+-------------------------------------------------------
+Global non pointer const data: rodata 
+Global non pointer static const data: rodata 
+Local non pointer static const data: rodata
+String literal (in double quotes of any scope): rodata
+-------------------------------------------------------

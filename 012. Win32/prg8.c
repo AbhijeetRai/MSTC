@@ -4,7 +4,7 @@ struct {
     int jersey; 
     char* name;
     char* team;
-}play_arr[] = {{7, "Dhoni", "India"}, {10, "Sachin", "India"}};
+}play_arr[] = {7, "Dhoni", "India", {10, "Sachin", "India"}};
 
 int main(void) {
 

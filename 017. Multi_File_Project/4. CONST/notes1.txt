@@ -1,10 +1,10 @@
 CONST KEYWORD: A variable when prefixed by const is not modifiable in 'C'.
 Normally global vars go on bss/non bss depending on intial value but when qualified with const keyword
 the global vars go on rodata. 
-(A programmer by any means is not supposed to edit data on rodata, shall a programmer tries to do that)
+(A programmer by any means is not supposed to edit data on rodata, shall a programmer try to do that)
 (His program is abrubtly terminated, leading to seg fault)
 -----------------------------------------------------------------------------------------------------------------
-                        GLOBAL NON                           LOCAL NON POINTER              LOCAL NON POINTER               GLOBAL STATIC 
+                        GLOBAL NON                           LOCAL NON POINTER              LOCAL NON POINTER               GLOBAL const STATIC 
                         POINTER CONST DATA                   CONST DATA                     STATIC CONST DATA               NON POINTER DATA 
 
 Storage Location            rodata                              stack                           rodata                          rodata
@@ -26,7 +26,7 @@ The code snippet show below was successful
 (except warning that; address of const int is stored in int* instead of const int*)
 (type of ptr is int* and type of value is const int, type (&value) is const int*)
 (But we are storing type const int* into int*, which is ignored for time being) 
-Code works because ptr exists on stack. It would not have worked, if ptr existed in rodata
+Code works because value exists on stack. It would not have worked, if value existed in rodata
 
 #include <stdio.h> 
 int main(void) {

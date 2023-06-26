@@ -1,0 +1,32 @@
+How does a number get stored in memory?
+
+Let's say, We want to store number 644531 in the memory.
+Hex representation of 644531 is 9D5B3. 
+
+It takes 4 bits to represent a hex number(0 to 15).
+It takees a byte for a couple of hex numbers. (0-15 0-15)
+Example 1A, FF, 2C, 77 and so on.
+
+So often we couple hex numbers together to store then in a byte
+(Bits are not addressable, bytes are)
+-----------------------------------------------------------------
+
+int: 644531
+hex: 9D5B3
+Since we need 20 bits to store 644531 by formula 
+    Bits required to represent int n = floor(log to base to n) + 1 
+
+Or look at it like there are 5 hex numbers to be stored: A hex takes 4 bits 
+Thus 20 bits must be stored. 
+So we can use short(16 bits only, skip it) or int (32 bits). 
+
+Thus, couple the hex digits together. 
+hex:                    9D5B3
+hex in 32 bits:     0x  00  09  D5  B3 
+little endian:          B3  D5  09  00
+------------------------------------------------------------------
+
+Binary representation of the little endian 
+
+  B   3     D       5       0     9     0      0
+1011 0011 |1101   0101 |  0000  1001 | 0000  0000
