@@ -1,0 +1,14 @@
+Principle 1) 
+Return value of every system call must be checked for possible failure. 
+
+1% of system calls never fail: getpid(), getuid();
+
+0.5 to 1% system calls return void*. E.g. mmap() | shamat() 
+If they succed they return non MULL address, on failure they return NULL
+
+Rest of system calls (98%) return int. E.g. 
+open(), read(), write(), readv(), writev(), pread(), 
+pwrite(), lseek(), preadv(), pwritev(), close(), dup(), 
+dup2() and many more 
+If they succed, return is 0, for failure return value is -1
+
