@@ -1,0 +1,9 @@
+BP is base pointer, SP is stack pointer, and IP is instruction pointer. 
+Usually BP is used for preserving space to use local variables. 
+SP is used to point the current stack. Although SP can be modified easily, you must be cautious 
+-----------------------------------------------------------------------------------------------
+
+BP is base pointer, which points to arguments(since they have no name in assembly) and local variables of functions
+IP is instruction pointer pointing to currently executing instruction 
+si and di are source and destination registers, which store address of source and destination memory in case of copy paste data 
+from one location of memory to another
