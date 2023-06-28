@@ -1,0 +1,29 @@
+
+	mov(suffix)	source_operand, destination_operand 
+	
+	The move instruction is used for data movement 
+	It transfers data from source operand to destination 
+	Just before and just after move instruction, content of source operand remains same 
+	But after move instruction the content of destination operand is overwritten by source operand content 
+	Suffix indicates number of bytes to be transferred 
+	
+	mov(b): 1 byte transfer 
+	mov(w): 2 byte transfer 
+	mov(l): 4 byte transfer 
+	mov(q): 8 byte transfer 
+	mov(dqu):16 byte transfer
+
+	We know that operands are of three types. These are 9 combinations between source-dest
+	Not all combinations are valid. 
+
+	Rules: 
+	1) Size of source and destination operand must be same 
+	2) Destination operand cannot be of immediate type (constant)
+	3) Both operands cannot be simultaenously memory operands 
+	
+	Out of 9, only five combinations are valid 
+	1) Const, Memory	
+	2) Immediate, Register 
+	3) Register, Memory
+	4) Register, Register 
+	5) Memory, Register 
