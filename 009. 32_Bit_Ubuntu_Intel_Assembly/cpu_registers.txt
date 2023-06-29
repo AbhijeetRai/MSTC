@@ -3,7 +3,63 @@ Usually BP is used for preserving space to use local variables.
 SP is used to point the current stack. Although SP can be modified easily, you must be cautious 
 -----------------------------------------------------------------------------------------------
 
-BP is base pointer, which points to arguments(since they have no name in assembly) and local variables of functions
+BP is base pointer, which points to function arguments(since they have no name in assembly) 
+and local variables(no name in assembly) of functions.
+
 IP is instruction pointer pointing to currently executing instruction 
 si and di are source and destination registers, which store address of source and destination memory in case of copy paste data 
 from one location of memory to another
+----------------------------------------------------------------------------------------------
+
+Apart from general purpose registers in 
+    8 bit 8080:     al, bl, cl, dl same as ah, bh, ch, dh (al and ah point to same 8 bit) 
+    16 bit 8086:    al (lower 8 bit) or ah (upeer 8 bit), bl/bh, cl/ch, dl/dh, ip, sp, bp, si, di 
+    32 bit 80386:   al(lower 8 bit) or ah (second lowest byte) or eax (full 32 bits), ebx, ecx, edx, esp, ebp, eip, esi, edi 
+    (In 64 bit, these ar called rax, rbx, rcx, rdx)
+-------------------------------------------------------------------------------------------
+
+There are other registers in (32 bit or other) processors 
+
+Flag registers(used internally for branching and looping): 
+    flags in 8086 
+    eflag in 80386
+
+FPU registers: 
+    Eight(st0 to st7) 80 bit registers to be used in fashion of stack
+
+Multimedia extension registers: 
+    Eight registers of size 64 bit called mm0 to mm7
+
+SIMD (single instruction multiple data) registers: 
+    Eight 128 bit sized registers (xmm0 to xmm7)
+    Tentative observation: 
+        128 bit xmm0 to xmm7 in 32 bit 
+        256 bit ymm0 to ymm7 in 64 bit
+
+Also only in assembly it is possible to have 128 bits or (64 bits for that matter)
+sized data but not in C (assembly > C)
+---------------------------------------------------------------------------------------------
+
+Other registers are:
+    Debug registers
+    Model specific registers (MXCSR)
+
+Kernel specific registers are called ring 0 registers in kernel.
+These 16 bit registers are segment registers
+    cs: code segment  
+    ds: data segment 
+    ss: stack segment
+    ex: extra segment
+    fs: 
+    gs: 
+--------------------------------------------------------------------------------------
+There arr 5: 32 but control registers 
+    cro to cr4
+    A control register is a processor register that changes or controls the general behavior of a CPU or other digital device
+    If cro[0] 0th bit is 0, os runs in real mode if it is 1, os runs in protected mode
+--------------------------------------------------------------------------------------
+Table registers: 
+    GDTR: Global Descriptor Table Register
+    LDTR: Local Descriptor TableRegister 
+    IDTR: Interrupt Descriptor Table Register 
+    TR: Task Register

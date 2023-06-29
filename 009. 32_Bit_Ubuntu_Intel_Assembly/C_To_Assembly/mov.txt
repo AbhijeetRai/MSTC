@@ -1,29 +1,83 @@
+				In general 				Assembly
+1 byte 				byte					byte 
+2 byte 				word 					word 
+4 byte 				double word 			long
+8 byte 				quad word 				quad word 
+16 byte 			double quad word		double quad word
+-------------------------------------------------------------------
+General Syntax: 
+    mov(suffix)     source_operand, destination_operand
 
-	mov(suffix)	source_operand, destination_operand 
-	
-	The move instruction is used for data movement 
-	It transfers data from source operand to destination 
-	Just before and just after move instruction, content of source operand remains same 
-	But after move instruction the content of destination operand is overwritten by source operand content 
-	Suffix indicates number of bytes to be transferred 
-	
-	mov(b): 1 byte transfer 
-	mov(w): 2 byte transfer 
-	mov(l): 4 byte transfer 
-	mov(q): 8 byte transfer 
-	mov(dqu):16 byte transfer
+Description: 
+    The move instruction is used for the data movement. 
+    
+    It transfers data from the source operand to desteination 
+    operand. 
+    
+    Just before and just after the move instruction content of 
+    the source operand remains the same. 
 
-	We know that operands are of three types. These are 9 combinations between source-dest
-	Not all combinations are valid. 
+    But after move instruction the content of destination operand 
+    is overwritten by the content of the source operand. 
 
-	Rules: 
-	1) Size of source and destination operand must be same 
-	2) Destination operand cannot be of immediate type (constant)
-	3) Both operands cannot be simultaenously memory operands 
-	
-	Out of 9, only five combinations are valid 
-	1) Const, Memory	
-	2) Immediate, Register 
-	3) Register, Memory
-	4) Register, Register 
-	5) Memory, Register 
+    The suffix of the move instruction indicates the number of bytes 
+    that are getting transferred in the current instruction. 
+
+    Possible suffixes: 
+        b -> 1 byte transfer (b -> byte)
+        w -> 2 byte transfer (w -> word)
+        l -> 4 byte transfer (l -> long)
+        q -> 8 byte transfer (q -> quad)
+        dqu -> 16 byte transfer (dqu -> double quad unaligned)
+
+    When we use the move instruction it always looks like one of the following: 
+    movb    source_operand, destination_operand
+    movw    source_operand, destination_operand
+    movl    source_operand, destination_operand
+    movq    source_operand, destination_operand
+    movdqu  source_operand, destination_operand
+
+    We know that operands are of three different types. Therefore, there are 9 
+    different combinations possible between the source and the destination operand. 
+    But not all combinations are valid. 
+
+    You must follow three rules to generate valid combinations of the move instruction. 
+
+    1) Size of source operand MUST BE EQUAL TO size of destination operand. 
+    2) Destination operand cannot be of immediate type. 
+    3) Both operands cannot be simultaneously memory operands. 
+
+    Out of nine, there are only five combinations which are valid. 
+
+    1) Source: Immediate, Destination=Memory 
+        movb    imm8, mem8 
+        movw    imm16, mem16 
+        movl    imm32, mem32 
+
+    2) Source: Immediate, Destination: Register 
+        movb    imm8, reg8 
+        movw    imm16, reg16 
+        movl    imm32, reg32 
+
+    3) Source: Register, Destination: Memory 
+        movb    reg8, mem8 
+        movw    reg16, mem16 
+        movl    reg32, mem32 
+        movq    reg64, mem64 
+        movdqu  reg128, mem128 
+
+    4)  Source: Register, Destination: Register
+        movb    reg8, reg8 
+        movw    reg16, reg16 
+        movl    reg32, reg32 
+        movq    reg64, reg64 
+        movdqu  reg128, reg128 
+
+    5)  Source: memory, Destination: Register 
+        movb    mem8, reg8 
+        movw    mem16, reg16 
+        movl    mem32, reg32 
+        movq    mem64, reg64 
+        movdqu  mem128, reg128 
+
+---------------------------------------------------------------
