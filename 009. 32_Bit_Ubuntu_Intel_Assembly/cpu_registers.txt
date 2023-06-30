@@ -63,3 +63,12 @@ Table registers:
     LDTR: Local Descriptor TableRegister 
     IDTR: Interrupt Descriptor Table Register 
     TR: Task Register
+--------------------------------------------------------------------------------------------
+
+In modern day 32 bit or 64 bit registers (say accumulator) 
+when we say 
+	rax: we mean all 64 bits of register (8 bytes)
+	eax: lower 32 bits of register 
+	ax: lower 16 bits 
+	al: lowest 8 bits 
+	ah: second lowest 8 bit (second lowest byte)
