@@ -1,0 +1,4 @@
+Steps to find segfault in c or assembly code 
+gcc -g prg.c or gcc -g prg.S 
+gdb ./a.out 
+run
