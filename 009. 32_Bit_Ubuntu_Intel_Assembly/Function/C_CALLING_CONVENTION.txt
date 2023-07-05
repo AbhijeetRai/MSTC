@@ -1,0 +1,46 @@
+Ten steps of C calling convention 
+
+1) Allocate storage space to formal paramters and intialise them (caller) 
+2) Save return address on stack(caller)
+3) Set frame pointer of caller (callee) 
+4) Set frame pointer of callee (callee) 
+
+5) Save space for local var (callee)
+6) Clear space for local var (callee) 
+7) Restore caller frame pointer (callee) 
+
+8) return (callee) 
+9) free space of formal arguments (caller) 
+10)copy eax to ret value (caller)
+----------------------------------------- 
+
+Let's see assembly of following code with respect to steps of calling conventions 
+
+int myfunc(n1, n2)  {
+	int sum = 0
+}
+
+myfunc(10, 20)
+
+-----------------------------------------
+Assembly 
+
+.section .text 
+.global myfunc 
+.type myfunc, @function 
+myfunc: 
+	pushl %ebp 		Step 3 	
+	movl %esp, %ebp 	Step 4 
+	subl $4, %esp		Step 5
+
+	Body 
+	
+	movl %ebp, %esp
+	popl %ebp 	
+	
+
+pushl $10 		Step 1
+pushl $20 		Step 1
+call myfunc 
+addl %8, %esp 		Step 9
+movl %eax, val		Step 10
