@@ -1,0 +1,9 @@
+Comparison instructions are different for signed and unsigned numbers
+
+        signed          unsigned
+<       jl  jnge        jb  jnae
+<=      jle jng         jbe jna
+>       jg  jnle        ja  jnbe 
+>=      jge jnl         jae jnb 
+==      je              jz 
+!=      jne             jnz
