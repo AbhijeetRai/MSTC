@@ -1,0 +1,83 @@
+Indexed Addressing Mode: 
+
+Version_1 
+
+variable_name(%r1, %r2, constant) 
+
+variable_name must be from rodata/data/bss section 
+%r1, %r2 -> must be general purpose registers 
+constant -> 1 or 2 or 4 or 8 
+
+Arithmetic: 
+address(variable_name) + r1 + r2 * size 
+
+
+e.g. 
+
+	# Using indexed addressing mode at source 
+	movl	arr(%eax, %edx, 4), %esi 
+
+	# addr arithemetic 
+	address(arr) + eax + edx * 4 == x (say) 
+
+	read M[x:x+3] and set it to esi 
+
+	In short 
+
+	esi <- M[x:x+3] 
+
+	where x == addr(arr) + eax + edx * 4  
+
+struct A{
+	long long n1; 
+	long long n2; 
+	int arr[5]; 
+}; 
+
+struct A inA = {35235, 3625, {10, 20, 30, 40, 50}}; 
+
+
+.globl 	inA 
+.type 	inA, @object 
+.size	inA, 36 
+.align	4 
+inA: 
+.int 	lower 4 bytes of n1 
+.int 	upper 4 bytes of n1 
+
+.int 	lower 4 bytes of n2 
+.int 	upper 4 bytes of n2 
+
+.int 	10, 20, 30, 40, 50
+
+.section .bss 
+	.comm	cnt, 4, 4 
+
+
+.section .text 
+.globl	main 
+.type	main, @function 
+
+main: 
+
+	pushl	%ebp 
+	movl	%esp, %ebp 
+		
+	movl	$16, %ebx 
+
+	movl	$0, cnt 
+	jmp		cond
+body: 
+	movl	cnt, %eax 
+	movl	inA(%ebx, %eax, 4), %edx # edx == inA.arr[cnt]
+
+	addl	$1, cnt 
+cond: 
+	movl	cnt, %eax 
+	cmpl	$5, %eax 
+	jl		body 
+
+
+
+	pushl	$0
+	call	exit
