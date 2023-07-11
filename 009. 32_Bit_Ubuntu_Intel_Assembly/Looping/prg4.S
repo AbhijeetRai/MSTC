@@ -17,6 +17,13 @@
 	arr: 
 		.int 4, 7, 1, 5, 8, 10, 15, 11 
 
+.global flag 
+	.type flag, @object 
+	.size flag, 4 
+	.align 4 
+	flag: 
+	.int 0
+
 .section .bss 
 	.comm i, 4, 4
 
