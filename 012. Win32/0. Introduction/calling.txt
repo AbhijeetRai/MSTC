@@ -24,7 +24,7 @@ i) Allocate storage to formal parameters and intialise those with actual paramet
 ii) Just before transferring the control to callee, store return address on stack (CALLER)
 
 iii)Store frame pointer of caller on stack (CALLEE)
-iv) Set callee frame pointer (CALLEE)
+iv) Store callee frame pointer (CALLEE)
 
 v)Allocate storage of local variable (CALLEE)
 vi) Free the address of local variable (CALLEE)
@@ -35,4 +35,3 @@ ix) Free the storage allocated to formal parameters (CALLLER)
 
 x) Copy return value from eax register to left hand variable of function (calle) call (CALLER) 
 --------------------------------------------------------------------------------------------------------
-

@@ -14,8 +14,6 @@
 	composite: 
 	.string "Number is composite"
 
-	edx_reg: 
-	.string "edx_reg = %d\n"	
 
 .section .data 
 	.global number 
@@ -32,8 +30,10 @@
 	half_of_number: 
 	.int 0 
 
+
 .section .bss 
 	.comm i, 4, 4
+
 
 .section .text 
 .global main 
