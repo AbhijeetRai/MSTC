@@ -1,0 +1,16 @@
+There are 7 types of files in Unix 
+Regular 
+Directory 
+Character special 
+Block special 
+Symbolic link 
+Named pipe or FIFO 
+Socket file
+-----------------------------------------------
+
+To execute folder means to be able to list contents of 
+nested folder of "the folder being executed"
+-------------------------------------------------
+
+When a file is being executed, its metadata(inode) is pulled on the RAM
+
