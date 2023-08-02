@@ -13,4 +13,3 @@ nested folder of "the folder being executed"
 -------------------------------------------------
 
 When a file is being executed, its metadata(inode) is pulled on the RAM
-

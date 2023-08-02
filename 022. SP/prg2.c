@@ -56,3 +56,10 @@ int main(void) {
 
 	return (0);
 }
+
+Sir, 
+Am I missing something, correct me. 
+In previous lecture, when we said: 
+while(readbytes = read(src_fd, buffer, BUFFER_SIZE)) 
+
+In event of error readbytes = -1 and while loop would not terminate 
