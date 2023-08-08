@@ -1,0 +1,29 @@
+In Time Sharing Operating Systems: there is concept of time multiplexing and space multiplexing. 
+
+Time Multiplexing: 
+Resources of the computer like CPU, whose chunks or smaller parts do not act like larger instances when broken. 
+Such resources are completely given to process for certain amount of time, until that process is awake. Meanwhile 
+other processes are sleeping and their sense of time is taken away. When other process comes alive or running 
+resource is completely given to it. 
+
+Space Multiplexing: 
+(RAM) Smaller instance of resource or device is functionally equivalent to larger instance of device. 
+Chunks of this resource is given to all processes for all the time. 
+-------------------------------------------------------------------------------------------------------
+
+When process is on CPU: it might be in user mode or kernel mode 
+When it is off CPU: it might be blocked(sleep) here kernel is logically blocked
+ or in ready to run state (achieved when time out)
+
+Sleep is of 2 types 
+Interruptible: Process wakes up on any event 
+Uniterruptible: Process does not wake up until specific event
+--------------------------------------------------------------------------------------------------------
+Each library is made up with: text, rodata and data,bss 
+
+Each process using library has own copy of data and bss 
+While only one physical shared copy of text and rodata (global data)
+
+To observe:
+In context of KCP, if two processes use same system call
+How global data is handled and protected

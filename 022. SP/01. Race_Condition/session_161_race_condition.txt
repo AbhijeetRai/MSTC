@@ -1,0 +1,92 @@
+Let's say, we have a C file with some data (number) in the bss section 
+
+random.c
+----
+int number = 10 
+int modify_number() {
+    number += 1;
+}
+
+which translates to the following in assembly: 
+movl number, %eax 
+addl $1, %eax 
+movl %eax, number 
+
+And let's say the modify_number function will be executed via two threads t1 and t2. 
+Please note, each thread has its own unique copy of stack. Thus, modify_number will 
+be executed in independent stacks. But the bss section is common across threads. 
+Consequently both the threads t1 and t2 will work upon same copy of the variable number in tandum. 
+
+Thus we expect modify_number to be executed twice acting on same copy of variable number. 
+Expecting the number to be incremented twice and final state of number being 12, once both threads 
+have completed their execution. (Let's call it post condition)
+
+Let' imagine a scenario how both threads must be executing the discussed steps in assembly
+instruction i) movl number, %eax 
+instruction ii) addl $1, %eax 
+instruction iii) movl %eax, number 
+
+t1 gets scheduled executes instruction i) and runs out of time slice and gets preempted (and its state is saved)
+where eax = 10. t2 get scheduled puts 10 in eax, adds 1 to eax and puts eax (11) into number 
+t1 comes into picture again, resumes since its last saved state (10 in eax). Then adds 1 to eax, eax is 11 now 
+and puts 11 back into number. Consequently state of number is 11 at the end of execution of both the threads 
+Post condition is violated. 
+
+Thus race condition (sharing of data) is not only about sequence of instructions but also how processes are scheduled 
+PS: OS will treat threads as (lightweight) processes and process scheduling algorithms will be applied on threads. 
+----------------------------------------------------------------------------------------------------------------------
+
+Similarly, let's say If we want to write at the end of a file via a process (p1). 
+We seek to end of file but before actually writing. P1 gets preempted and p2 writes at end of file 
+P1 is not aware, p2 has written at the end, p1 gets scheduled again and will write over data written by p2
+
+Process 1 
+seek (fd, SEEK_END, 0) //Seek to write at the end of file 
+PREEMPT 
+                                                    Process2 
+                                                    opens same file 
+                                                    and writes some data at end 
+Write() 
+(But data written by p2 is overwritten)
+----------------------------------------------------------------------------------------------------------------------
+
+Solution: 
+While writing a program, the user must use sync mechnaisms(mutex/sempahores) to to avoid software flaws caused by race hazards (conditions). 
+Doing so will make sure, shared data is accessed in mutual exclusion. Shared data is not modified or accessed by processes or threads 
+parallely. When a process or threads is accessing shared data, it is not accessed by other process or threads and shared data remains mutually exclusive 
+to one process or data.  
+
+While speaking of OS, it internally by default uses the principle of mutual exclusion when its resources are being shared. 
+Like a file being shared in the filesystem across programs or processes. 
+The OS will lock a resource when "a" (one) system call is being executed.  
+But the OS would never never lock a resource across the system calls.
+
+Imagine what would have happened if the OS locked a resource across system calls 
+
+prg.c 
+----- 
+i) open_a_file_system_call()
+ii)write_some_data_via_system_call 
+iii)some_other_user_mode_stuff 
+iv)write_data_again_via_system_call 
+
+Okay fine, opened file was locked at stage ii) only to be unlocked after stage iv) 
+But what if process was killed at stage iii). A shared resource (like file here) would be locked forever.
+Thus, OS locks a shared resource until a system call runs and unlocks after system call is executed. 
+
+Let's discus two more scenarios
+i)What if a resource is locked while system call is being executed in process p1 and p1 runs out of time slice 
+and process p2 is scheduled while accesses the same shared resource: 
+The OS simply makes p2 wait for shared resource or blocks it or unschedules it until shared resource is freed from 
+system call of p1 
+
+ii)What if a shared resource or data is locked by a process while a sys call is being executed (obviously in kernel mode) and 
+a the process is abrubtly killed? Will the shared resource be locked forever and lost 
+No abrubt termination is carried out by signal, which can be received by the process anytime in any mode 
+But a process is killed only when it enters user mode or to be specific, the kill signal will be processed only when 
+process switches to the user mode. And once the proces enters user mode from kernel mode, system call is completed and resource is freed 
+----------------------------------------------------------------------------------------------------------------------------------
+
+Thus, a process while its system call is being executed can run out of time slice and get preempted while it access the shared resource. 
+Hence there is no CPU scheduling atomicity (other process my get scheduled on CPU) but kernel wont let other processes access the shared locked resource by p1 
+illustrating behavioral atomicity and kernel synchronization
