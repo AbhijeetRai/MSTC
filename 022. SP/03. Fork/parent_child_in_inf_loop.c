@@ -1,43 +1,35 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <errno.h> 
-#include <string.h> 
-#include <unistd.h> 
+#include <stdio.h>
+#include <unistd.h>
 
-#define TRUE                1 
-#define MAX_SLEEP_DURATION  4
+/**
+ * Demo of time sharing os
+ */
 
-void child_code(void); 
-void parent_code(void); 
-
-int main(void){
-    pid_t pid; 
-
-    pid = fork(); 
-    if(pid == -1){
-        fprintf(stderr, "fork:%s\n", strerror(errno)); 
-        exit(EXIT_FAILURE); 
-    }
-
-    if(pid == 0){
-        child_code(); 
-    }else{
-        parent_code(); 
-    }
-
-    exit(EXIT_SUCCESS); 
+void child() {
+	
+	while(1) {
+		sleep(4);
+		printf("CHILD: pid(): %d || ppid() %d\n", getpid(), getppid());
+	}
 }
 
-void child_code(void){
-    while(TRUE){
-        printf("CHILD:PID%d, CHILD:ppid:%d\n", getpid(), getppid()); 
-        sleep(30); 
-    }
+void parent() {
+	
+	while(1) {
+		sleep(2);
+		printf("PARENT: pid(): %d || ppid() %d\n", getpid(), getppid());
+	}
 }
 
-void parent_code(void){
-    while(TRUE){
-        printf("PARENT:PID:%d, PAERNT:ppid:%d\n", getpid(), getppid()); 
-        sleep(rand() % MAX_SLEEP_DURATION); 
-    }
+int main(void) {
+	
+	pid_t pid; 
+	
+	pid = fork();
+	
+	if(pid == 0)
+		child(); 
+	else 
+		parent();
 }
+

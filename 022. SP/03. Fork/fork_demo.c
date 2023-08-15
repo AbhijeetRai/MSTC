@@ -1,25 +1,25 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <errno.h> 
-#include <string.h> 
-#include <unistd.h> 
+#include <stdio.h>
+#include <unistd.h>
 
-int main(void){
-    pid_t pid; 
+/**
+ * The fork system call is responsible for creating a child process. 
+ * Process which calls fork becomes the parent process
+ * Child copies virtual address space of parent 
 
-    pid = fork(); 
-    if(pid == -1){
-        fprintf(stderr, "fork:%s\n", strerror(errno)); 
-        exit(EXIT_FAILURE); 
-    }
+ * Child's process id is returned to parent and 0 is returned to child process by fork 
+ * to indicate you (child) have been successfully created
+ */
 
-    if(pid == 0){
-        printf("Child Process:pid=%d, ppid=%d\n", getpid(), getppid()); 
-
-    }else{
-        printf("Parent Process:pid=%d, ppid=%d\n", getpid(), getppid()); 
-    }
-
-    printf("Executed by process with pid=%d\n", getpid()); 
-    exit(EXIT_SUCCESS); 
+int main(void) {
+	
+	pid_t pid; 
+	
+	pid = fork();
+	
+	if(pid == 0) 
+		printf("CHILD || CHILD PROCESS ID: %d || CHILD's PARENT PROCESS ID: %d\n", getpid(), getppid()); 
+	else {	
+		sleep(2);
+		printf("PARENT|| PID RETURNED TO PARENT: %d || PARENT PROCESS ID: %d\n", pid, getpid());	
+	}
 }
