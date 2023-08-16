@@ -1,0 +1,19 @@
+/**
+ * Demonstration of zombie process: 
+ * When child process is stopped or terminated, parent process receives SIGCHLD signal 
+ * 
+ * When child process is terminated, its virutal address space or process block will cease to exist
+ * Parent receives SIGCHLD and carries out disposition for SIGCHLD. 
+ * 
+ *
+ * In the interim, virtual address space is gone but task_struct block or PCB is not gone
+ * Child is nor dead nor completely alive, it is zombie. Child waits for its parent to do its cleanup 
+ * Reap the child, delete its task_struct block for child to be completely dead. 
+
+ * As long as disposition is being carried out, child is stuck in zombie state. 
+ * Once signal disposition is carried out, even if signal is blocked or ignored. 
+ * Child is free to be cleaned up and be completely dead 
+
+ * ASK: What if parent dies before doing cleanup, will init or systemd(parent of all) reap the child or leave it in zombie state
+ */ 
+
