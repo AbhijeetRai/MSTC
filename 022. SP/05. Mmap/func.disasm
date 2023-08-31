@@ -1,0 +1,65 @@
+
+func.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <test>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	b8 64 00 00 00       	mov    $0x64,%eax
+   8:	5d                   	pop    %ebp
+   9:	c3                   	ret    
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	00 47 43             	add    %al,0x43(%edi)
+   3:	43                   	inc    %ebx
+   4:	3a 20                	cmp    (%eax),%ah
+   6:	28 55 62             	sub    %dl,0x62(%ebp)
+   9:	75 6e                	jne    79 <test+0x79>
+   b:	74 75                	je     82 <test+0x82>
+   d:	20 35 2e 34 2e 30    	and    %dh,0x302e342e
+  13:	2d 36 75 62 75       	sub    $0x75627536,%eax
+  18:	6e                   	outsb  %ds:(%esi),(%dx)
+  19:	74 75                	je     90 <test+0x90>
+  1b:	31 7e 31             	xor    %edi,0x31(%esi)
+  1e:	36 2e 30 34 2e       	ss xor %dh,%cs:(%esi,%ebp,1)
+  23:	31 32                	xor    %esi,(%edx)
+  25:	29 20                	sub    %esp,(%eax)
+  27:	35 2e 34 2e 30       	xor    $0x302e342e,%eax
+  2c:	20 32                	and    %dh,(%edx)
+  2e:	30 31                	xor    %dh,(%ecx)
+  30:	36 30 36             	xor    %dh,%ss:(%esi)
+  33:	30 39                	xor    %bh,(%ecx)
+	...
+
+Disassembly of section .eh_frame:
+
+00000000 <.eh_frame>:
+   0:	14 00                	adc    $0x0,%al
+   2:	00 00                	add    %al,(%eax)
+   4:	00 00                	add    %al,(%eax)
+   6:	00 00                	add    %al,(%eax)
+   8:	01 7a 52             	add    %edi,0x52(%edx)
+   b:	00 01                	add    %al,(%ecx)
+   d:	7c 08                	jl     17 <.eh_frame+0x17>
+   f:	01 1b                	add    %ebx,(%ebx)
+  11:	0c 04                	or     $0x4,%al
+  13:	04 88                	add    $0x88,%al
+  15:	01 00                	add    %eax,(%eax)
+  17:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  1a:	00 00                	add    %al,(%eax)
+  1c:	1c 00                	sbb    $0x0,%al
+  1e:	00 00                	add    %al,(%eax)
+  20:	00 00                	add    %al,(%eax)
+  22:	00 00                	add    %al,(%eax)
+  24:	0a 00                	or     (%eax),%al
+  26:	00 00                	add    %al,(%eax)
+  28:	00 41 0e             	add    %al,0xe(%ecx)
+  2b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  31:	46                   	inc    %esi
+  32:	c5 0c 04             	lds    (%esp,%eax,1),%ecx
+  35:	04 00                	add    $0x0,%al
+	...
