@@ -1,0 +1,4 @@
+Run writer first in one terminal. 
+	gcc writer.c -o writer
+
+In other terminal: Run reader
